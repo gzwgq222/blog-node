@@ -10,7 +10,8 @@
 
 # production
 /build
-
+# 因 uglify-js 版本低于2.6.0 github会给出警告
+yarn.lock
 # misc
 .DS_Store
 .env.local
