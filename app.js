@@ -6,8 +6,8 @@ var app = require('koa')()
 
 var index = require('./routes/index');
 var users = require('./routes/users');
-const example = require('./routes/example')
 
+const example = require('./routes/example')
 const config = require('./config')
 const mongoose = require('mongoose')
 
