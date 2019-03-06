@@ -23,6 +23,7 @@
     "mongoose": "^5.4.16"
   },
   "devDependencies": {
+    "mongoose-auto-increment": "^5.0.1",
     "nodemon": "^1.8.1"
   }
 }

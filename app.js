@@ -15,9 +15,9 @@ const mongoose = require('mongoose')
 onerror(app);
 mongoose.connect(config.db, { useNewUrlParser: true }, err => {
   if (err) {
-    console.error('链接数据库出错了')
+    console.log(err)
   } else {
-    console.log('链接数据库成功了！')
+    console.log('芒果 真香 ...')
   }
 })
 // global middlewares
