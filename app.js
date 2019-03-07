@@ -6,20 +6,10 @@ var app = require('koa')()
 
 var index = require('./routes/index');
 var users = require('./routes/users');
-
-const example = require('./routes/example')
-const config = require('./config')
-const mongoose = require('mongoose')
-
-// error handler
+const { connect } = require('./mongoose')
 onerror(app);
-mongoose.connect(config.db, { useNewUrlParser: true }, err => {
-  if (err) {
-    console.log(err)
-  } else {
-    console.log('芒果 真香 ...')
-  }
-})
+// 链接数据库
+connect()
 // global middlewares
 app.use(views('views', {
   root: __dirname + '/views',
@@ -37,6 +27,7 @@ app.use(function *(next){
 });
 
 app.use(require('koa-static')(__dirname + '/public'));
+const example = require('./routes/example')
 
 // routes definition
 app.use(index.routes(), index.allowedMethods());
