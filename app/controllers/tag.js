@@ -1,6 +1,8 @@
 const Tag = require('../models/tag')
 
 const taglist = async function() {
+  const query = this.request.body
+  console.log(1, query)
   const data = await Tag.find()
   this.status = 200
   this.body = {
@@ -19,8 +21,18 @@ const createtag = async function() {
     desc: '新增成功'
   }
 }
+const deletetag = async function() {
+  const query = this.request.body
+  await Tag.remove(query)
+  this.state = 200
+  this.body = {
+    code: 1000,
+    desc: '请求成功'
+  }
+}
 
 module.exports = {
   taglist,
-  createtag
+  createtag,
+  deletetag
 }
