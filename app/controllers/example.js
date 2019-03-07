@@ -2,7 +2,6 @@
 const Example = require('./../models/example');
 
 const getExample = async function(next) {
-  console.log(1)
   const data = await Example.find()
   this.status = 200;
   this.body = {

@@ -28,11 +28,13 @@ app.use(function *(next){
 
 app.use(require('koa-static')(__dirname + '/public'));
 const example = require('./routes/example')
+const tag = require('./routes/tag')
 
 // routes definition
-app.use(index.routes(), index.allowedMethods());
-app.use(users.routes(), users.allowedMethods());
-app.use(example.routes(), example.allowedMethods());
+app.use(index.routes(), index.allowedMethods())
+app.use(users.routes(), users.allowedMethods())
+app.use(example.routes(), example.allowedMethods())
+app.use(tag.routes(), tag.allowedMethods())
 
 // error-handling
 app.on('error', (err, ctx) => {
