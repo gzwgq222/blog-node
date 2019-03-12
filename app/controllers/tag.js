@@ -1,9 +1,10 @@
 const Tag = require('../models/tag')
 
 const taglist = async function() {
-  const query = this.request.body
-  console.log(1, query)
-  const data = await Tag.find()
+  let name = this.request.query.name
+  const page = Number(this.request.query.page) || 10
+  const params = name ? {name} : {}
+  const data = await Tag.find(params, {_id: 0}).limit(page)
   this.status = 200
   this.body = {
     code: 1000,
