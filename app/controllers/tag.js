@@ -2,7 +2,9 @@ const Tag = require('../models/tag')
 
 const taglist = async function() {
   const name = this.request.query.name,
-        page = Number(this.request.query.page) || 10,
+        pageSize = Number(this.request.query.pageSize) || 10,
+        pageNo = Number(this.request.query.pageNo) - 1 || 0,
+        num = pageNo * pageSize,
         /**
          * 正则表达式中使用变量
          * 一定要使用eval将组合的字符串进行转换
@@ -15,10 +17,11 @@ const taglist = async function() {
         total = await Tag.find()
                          .count(),
         data = await Tag.find(params, {_id: 0})
-                        .limit(page)
-                        .skip()
+                        .limit(pageSize)
+                        .skip(num)
                         .sort({id: 1})
   this.status = 200
+  console.log(8, num)
   this.body = {
     code: 1000,
     data,
