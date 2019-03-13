@@ -1,5 +1,13 @@
 const Tag = require('../models/tag')
 
+const tagListAll = async function () {
+  data = await Tag.find({}, {_id: 0})
+  this.status = 200
+  this.body = {
+    code: 1000,
+    data
+  }
+}
 const taglist = async function() {
   const name = this.request.query.name,
         pageSize = Number(this.request.query.pageSize) || 10,
@@ -14,26 +22,19 @@ const taglist = async function() {
          */
         params = name ? {name: eval(`/${name}/i`)} : {},
         // params = name ? {name: {$regex: name, $options: '$ix'}} : {},
-        total = await Tag.find()
-                         .count(),
-        data = await Tag.find(params, {_id: 0})
-                        .limit(pageSize)
-                        .skip(num)
-                        .sort({id: 1})
+        total = await Tag.count(),
+        data = await Tag.find(params, {_id: 0}).limit(pageSize).skip(num).sort({id: 1})
   this.status = 200
-  console.log(8, num)
   this.body = {
     code: 1000,
     data,
     total
   }
-
 }
 const createtag = async function() {
   const req = this.request.body
-  console.log(6, req)
   this.state = 200
-  const result = await Tag.create(req)
+  await Tag.create(req)
   this.body = {
     code: 1000,
     desc: '新增成功'
@@ -45,11 +46,12 @@ const deletetag = async function() {
   this.state = 200
   this.body = {
     code: 1000,
-    desc: '请求成功'
+    desc: '删除成功'
   }
 }
 
 module.exports = {
+  tagListAll,
   taglist,
   createtag,
   deletetag
